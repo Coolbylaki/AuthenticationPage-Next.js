@@ -25,39 +25,9 @@
 	margin-bottom: 2rem;
 }
 
-.reg__form input {
-	margin-bottom: 1rem;
-	width: 100%;
-	border-radius: 0.75rem;
-	border: 1px solid #bdbdbd;
-	padding: 0.8rem 0 0.8rem 3rem;
-}
-
-.reg__form button {
-	color: #fff;
-	background-color: #2f80ed;
-	width: 100%;
-	margin-top: 0.5rem;
-	padding: 0.5rem 0;
-	border: none;
-	border-radius: 0.5rem;
+.sub__desc {
 	text-align: center;
-	font-size: 1rem;
-	font-weight: 600;
-	cursor: pointer;
-}
-
-.inputContainer {
-	display: flex;
-	align-items: center;
-	position: relative;
-	margin-bottom: 1rem;
-}
-
-.ico {
-	font-size: 1.25rem;
-	margin-right: 1rem;
-	position: absolute;
-	left: 1rem;
-	top: 1rem;
+	color: #828282;
+	font-size: 0.875rem;
+	font-weight: 400;
 }
