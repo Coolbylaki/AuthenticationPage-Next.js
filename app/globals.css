@@ -1,13 +1,13 @@
 :root {
-	--text-primary: "#333333";
-	--background-primary: "#FFFFFF";
-	--icon-primary: "#282051";
+	--text-primary: #333333;
+	--background-primary: #ffffff;
+	--icon-primary: #282051;
 }
 
 .dark-theme {
-	--text-primary: "#E0E0E0";
-	--background-primary: "#252329";
-	--icon-primary: "#E0E0E0";
+	--text-primary: #e0e0e0;
+	--background-primary: #252329;
+	--icon-primary: #e0e0e0;
 }
 
 *,
