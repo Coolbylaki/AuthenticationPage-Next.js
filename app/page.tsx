@@ -2,6 +2,7 @@
 
 import RegisterForm from "@/components/Forms/RegisterForm";
 import LoginProviders from "@/components/Providers/LoginProviders";
+import LoginForm from "@/components/Forms/LoginForm";
 
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -12,21 +13,27 @@ export default function Home() {
 
 	return (
 		<main className={styles.main}>
-			<Image src="/devchallenges.svg" alt="devChallenges logo" width={130} height={18} />
+			<Image
+				src="/devchallenges.svg"
+				alt="devChallenges logo"
+				width={130}
+				height={18}
+				className={styles.logo}
+			/>
 
-			{showRegister && <RegisterForm />}
+			{showRegister ? <RegisterForm /> : <LoginForm />}
 
 			<p className={styles.sub__desc}>or continue with these social profile</p>
 
 			<LoginProviders />
 
 			<p className={styles.login}>
-				Already a member?{" "}
+				{showRegister ? "Already a member?" : "Don’t have an account yet?"}
 				<span
 					onClick={() => {
 						setShowRegister((prevState) => !prevState);
 					}}>
-					Login
+					{showRegister ? " Login" : " Register"}
 				</span>
 			</p>
 

@@ -1,17 +1,8 @@
 .title {
 	color: var(--text-primary);
-	font-size: 1.3rem;
+	font-size: 1.125rem;
 	font-weight: 600;
-	line-height: normal;
-	margin-bottom: 1rem;
-}
-
-.desc {
-	color: var(--text-primary);
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: normal;
-	margin-bottom: 2rem;
+	margin-bottom: 1.7rem;
 }
 
 .reg__form input {
