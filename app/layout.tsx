@@ -1,18 +1,21 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const noto = Noto_Sans({
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
 	title: "Authenticator App",
-	description: "Practicing NextAuth with 4 providers",
+	description: "NextAuth authentication with 4 providers practice project",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={noto.className}>{children}</body>
 		</html>
 	);
 }
