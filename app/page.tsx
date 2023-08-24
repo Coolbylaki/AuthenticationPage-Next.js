@@ -6,15 +6,24 @@ import LoginForm from "@/components/Forms/LoginForm";
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
 	const [showRegister, setShowRegister] = useState(true);
+	const [logoSrc, setLogoSrc] = useState("/devchallenges.svg");
+
+	useEffect(() => {
+		if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			setLogoSrc("/devchallenges-light.svg");
+		} else {
+			setLogoSrc("/devchallenges.svg");
+		}
+	}, []);
 
 	return (
 		<main className={styles.main}>
 			<Image
-				src="/devchallenges.svg"
+				src={logoSrc}
 				alt="devChallenges logo"
 				width={130}
 				height={18}

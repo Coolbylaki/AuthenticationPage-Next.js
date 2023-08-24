@@ -19,6 +19,7 @@
 	width: 100%;
 	border-radius: 0.75rem;
 	border: 1px solid #bdbdbd;
+	background-color: var(--background-primary);
 	padding: 0.8rem 0 0.8rem 3rem;
 }
 

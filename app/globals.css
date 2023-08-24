@@ -4,10 +4,12 @@
 	--icon-primary: #282051;
 }
 
-.dark-theme {
-	--text-primary: #e0e0e0;
-	--background-primary: #252329;
-	--icon-primary: #e0e0e0;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--text-primary: #e0e0e0;
+		--background-primary: #252329;
+		--icon-primary: #e0e0e0;
+	}
 }
 
 *,
@@ -23,6 +25,7 @@
 body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
+	background-color: var(--background-primary);
 }
 
 img,
