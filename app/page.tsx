@@ -37,7 +37,7 @@ export default function Home() {
 			<LoginProviders />
 
 			<p className={styles.login}>
-				{showRegister ? "Already a member?" : "Don’t have an account yet?"}
+				{showRegister ? "Already a member?" : "Don't have an account yet?"}
 				<span
 					onClick={() => {
 						setShowRegister((prevState) => !prevState);
@@ -48,7 +48,7 @@ export default function Home() {
 
 			<footer className={styles.footer}>
 				<p>Lazar Stojanović</p>
-				<p>devChallenges.io</p>
+				<p>devchallenges.io</p>
 			</footer>
 		</main>
 	);

@@ -52,3 +52,28 @@
 	font-size: 0.875rem;
 	font-weight: 400;
 }
+
+@media screen and (min-width: 640px) {
+	.main {
+		max-width: 33.5rem;
+		border: 1px solid #bdbdbd;
+		border-radius: 1.5rem;
+		padding: 3.5rem;
+		min-height: 700px;
+		position: relative;
+	}
+
+	.logo {
+		position: absolute;
+		top: 1rem;
+		margin-bottom: 1.75rem;
+	}
+
+	.footer {
+		width: 100%;
+		max-width: 26.375rem;
+		position: absolute;
+		bottom: 1rem;
+		margin: 1.5rem 0 0 0;
+	}
+}

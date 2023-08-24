@@ -58,3 +58,13 @@ h6 {
 #__next {
 	isolation: isolate;
 }
+
+@media screen and (min-width: 640px) {
+	body {
+		min-height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 1rem;
+	}
+}
