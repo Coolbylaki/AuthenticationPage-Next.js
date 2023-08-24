@@ -12,6 +12,7 @@
 	border: 1px solid #bdbdbd;
 	background-color: var(--background-primary);
 	padding: 0.8rem 0 0.8rem 3rem;
+	color: var(--placeholder-text);
 }
 
 .reg__form button {

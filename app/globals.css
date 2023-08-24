@@ -2,6 +2,7 @@
 	--text-primary: #333333;
 	--background-primary: #ffffff;
 	--icon-primary: #282051;
+	--placeholder-text: #252329;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -9,6 +10,7 @@
 		--text-primary: #e0e0e0;
 		--background-primary: #252329;
 		--icon-primary: #e0e0e0;
+		--placeholder-text: #ffffff;
 	}
 }
 
