@@ -9,14 +9,14 @@ import { signIn } from "next-auth/react";
 import { FormEvent, useRef } from "react";
 
 export default function LoginForm() {
-	const username = useRef("");
+	const email = useRef("");
 	const password = useRef("");
 
 	const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		await signIn("credentials", {
-			username: username.current,
+			email: email.current,
 			password: password.current,
 			redirect: true,
 			callbackUrl: "http://localhost:3000/profile",
@@ -38,7 +38,7 @@ export default function LoginForm() {
 						type="email"
 						placeholder="Email"
 						name="username"
-						onChange={(e) => (username.current = e.target.value)}
+						onChange={(e) => (email.current = e.target.value)}
 					/>
 				</div>
 				<div className={styles.inputContainer}>
