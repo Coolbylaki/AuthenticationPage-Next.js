@@ -1,6 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
 type Credentials = {
 	email: string;
 	password: string;
@@ -16,6 +19,7 @@ const handler = NextAuth({
 				password: { label: "Password", type: "password" },
 			},
 
+			//@ts-ignore
 			async authorize(credentials, req) {
 				const { email, password } = credentials as Credentials;
 				// Perform your login logic or find out user from database
@@ -23,12 +27,14 @@ const handler = NextAuth({
 					return null;
 				}
 				// If everything is fine
-				const user = {
-					id: "1234",
-					name: "John Doe!!!",
-					email: "test@test.com",
-				};
-				return user;
+				const user = await prisma.users.findFirst();
+				await prisma.$disconnect();
+
+				if (user) {
+					return user;
+				} else {
+					return null;
+				}
 			},
 		}),
 	],
