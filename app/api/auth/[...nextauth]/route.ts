@@ -4,12 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-declare module "next-auth" {
-	interface User {
-		id: number;
-	}
-}
-
 const handler = NextAuth({
 	providers: [
 		CredentialsProvider({
