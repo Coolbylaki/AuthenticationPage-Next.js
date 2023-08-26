@@ -15,7 +15,7 @@ export default function LoginForm() {
 						icon={faEnvelope}
 						style={{ color: "#828282" }}
 					/>
-					<input type="text" placeholder="Email" />
+					<input type="email" placeholder="Email" name="email" />
 				</div>
 				<div className={styles.inputContainer}>
 					<FontAwesomeIcon
@@ -23,7 +23,7 @@ export default function LoginForm() {
 						icon={faLock}
 						style={{ color: "#828282" }}
 					/>
-					<input type="text" placeholder="Password" />
+					<input type="password" placeholder="Password" name="password" />
 				</div>
 
 				<button type="submit">Login</button>

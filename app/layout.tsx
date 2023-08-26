@@ -5,6 +5,8 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
+import Providers from "@/components/Providers";
+
 const noto = Noto_Sans({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700"],
@@ -19,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={noto.className} suppressHydrationWarning={true}>
-				{children}
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
