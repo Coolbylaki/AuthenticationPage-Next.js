@@ -1,48 +1,84 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
-import { FormEvent, useState, useRef } from "react";
+import { FormEvent, useState, ChangeEvent, useEffect } from "react";
 import styles from "./RegisterForm.module.css";
 
 export default function RegisterForm() {
-	const [isPasswordValid, setIsPasswordValid] = useState(false);
+	const initialValues = { email: "", password: "" };
+	const [formValues, setFormValues] = useState(initialValues);
+	const [formErrors, setFormErrors] = useState<{ email?: string; password?: string }>(
+		{}
+	);
+	const [isSubmit, setIsSubmit] = useState(false);
+	const [isValidated, setIsValidated] = useState(false);
 
-	const emailRef = useRef<HTMLInputElement | null>(null);
-	const passwordRef = useRef<HTMLInputElement | null>(null);
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormValues({ ...formValues, [name]: value });
+	};
+
+	useEffect(() => {
+		if (Object.keys(formErrors).length === 0 && isSubmit) {
+			// When both are true we get this
+			setIsValidated(true);
+		} else {
+			setIsValidated(false);
+		}
+	}, [formErrors, formValues, isSubmit]);
 
 	const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
-		const passwordRegex = /^(?=.*\d).{8,}$/;
 		event.preventDefault();
 
+		setFormErrors(validate(formValues));
+
+		setIsSubmit(true);
+
 		const user = {
-			email: emailRef.current?.value,
-			password: passwordRef.current?.value,
+			email: formValues.email,
+			password: formValues.password,
 		};
 
-		if (!user.password?.match(passwordRegex)) {
-			setIsPasswordValid(true);
-			return;
-		}
+		if (isValidated) {
+			try {
+				const response = await fetch("/api/user", {
+					method: "POST",
+					body: JSON.stringify(user),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
 
-		setIsPasswordValid(false);
-
-		try {
-			const response = await fetch("/api/user", {
-				method: "POST",
-				body: JSON.stringify(user),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-
-			if (response.ok) {
-				console.log("User registered successfully!");
-			} else {
-				console.error("User registration failed.");
+				if (response.ok) {
+					console.log("User registered successfully!");
+				} else {
+					console.error("User registration failed.");
+				}
+			} catch (error) {
+				console.error("An error occurred:", error);
 			}
-		} catch (error) {
-			console.error("An error occurred:", error);
 		}
+	};
+
+	const validate = (values: any) => {
+		const errors: Record<string, any> = {};
+		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		const passwordRegex = /^(?=.*\d).{8,}$/;
+
+		if (!values.email) {
+			errors.email = "Email is required!";
+		} else if (!emailRegex.test(values.email)) {
+			errors.email = "This is not a valid email format!";
+		}
+
+		if (!values.password) {
+			errors.password = "Password is required!";
+		} else if (!passwordRegex.test(values.password)) {
+			errors.password =
+				"Password must contain a number and be at least 8 characters long";
+		}
+
+		return errors;
 	};
 
 	return (
@@ -60,22 +96,33 @@ export default function RegisterForm() {
 						icon={faEnvelope}
 						style={{ color: "#828282" }}
 					/>
-					<input type="email" placeholder="Email" ref={emailRef} />
+					<input
+						type="text"
+						placeholder="Email"
+						defaultValue={formValues.email}
+						name="email"
+						onChange={handleChange}
+					/>
 				</div>
+
+				<p className={styles.error}>{formErrors.email || ""}</p>
+
 				<div className={styles.inputContainer}>
 					<FontAwesomeIcon
 						className={styles.ico}
 						icon={faLock}
 						style={{ color: "#828282" }}
 					/>
-					<input type="password" placeholder="Password" ref={passwordRef} />
+					<input
+						type="password"
+						placeholder="Password"
+						name="password"
+						defaultValue={formValues.password}
+						onChange={handleChange}
+					/>
 				</div>
 
-				{isPasswordValid && (
-					<p className={styles.error}>
-						Password must contain a number and at least 8 char long
-					</p>
-				)}
+				<p className={styles.error}>{formErrors.password || ""}</p>
 
 				<button type="submit">Start coding now</button>
 			</form>

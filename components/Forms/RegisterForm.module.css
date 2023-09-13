@@ -55,12 +55,9 @@
 }
 
 .error {
-	margin-bottom: 1rem;
-	text-align: center;
-	background-color: rgb(199, 36, 36);
-	border-radius: 0.5rem;
-	padding: 0.5rem 0.75rem;
-	color: var(--text-primary);
+	position: relative;
+	bottom: 1rem;
+	color: rgb(199, 36, 36);
 	font-weight: bold;
 	font-size: 0.75rem;
 }
