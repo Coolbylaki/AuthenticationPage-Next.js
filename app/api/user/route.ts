@@ -44,5 +44,5 @@ export async function GET(request: Request) {
 	}
 
 	// Return user data if everything is okay
-	return NextResponse.json(user);
+	return NextResponse.json({ user });
 }
