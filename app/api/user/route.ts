@@ -46,3 +46,9 @@ export async function GET(request: Request) {
 	// Return user data if everything is okay
 	return NextResponse.json({ user });
 }
+
+export async function POST(request: Request) {
+	const body = await request.json();
+	console.log(body);
+	return body;
+}
