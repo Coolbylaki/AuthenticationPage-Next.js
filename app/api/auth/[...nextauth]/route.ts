@@ -15,6 +15,9 @@ const handler = NextAuth({
 			},
 
 			async authorize(credentials, req) {
+				// Hardcoded password for testing
+				const hardcodedPassword = "laki98sd";
+
 				const user = await prisma.users.findUnique({
 					where: {
 						email: credentials?.email,
@@ -25,11 +28,11 @@ const handler = NextAuth({
 					return null;
 				}
 
-				if (user) {
+				if (user && credentials?.password === hardcodedPassword) {
 					return user;
-				} else {
-					return null;
 				}
+
+				return null;
 			},
 		}),
 	],
