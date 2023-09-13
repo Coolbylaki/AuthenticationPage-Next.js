@@ -7,6 +7,9 @@ import { useSession } from "next-auth/react";
 
 export default function Profile() {
 	const [logoSrc, setLogoSrc] = useState("/devchallenges.svg");
+	const [user, setUser] = useState({});
+
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -16,7 +19,18 @@ export default function Profile() {
 		}
 	}, []);
 
-	const { data: session } = useSession();
+	useEffect(() => {
+		const fetchUser = async () => {
+			if (session && session.user?.email) {
+				const response = await fetch(`/api/user?email=${session.user?.email}`);
+				const data = await response.json();
+
+				setUser(data.user);
+			}
+		};
+
+		fetchUser();
+	}, [session]);
 
 	if (session && session.user) {
 		return (
