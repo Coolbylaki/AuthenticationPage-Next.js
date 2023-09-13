@@ -8,7 +8,11 @@ import styles from "./LoginForm.module.css";
 import { signIn } from "next-auth/react";
 import { FormEvent, useRef } from "react";
 
-export default function LoginForm() {
+type Props = {
+	error: boolean;
+};
+
+export default function LoginForm({ error }: Props) {
 	const email = useRef("");
 	const password = useRef("");
 
@@ -54,6 +58,8 @@ export default function LoginForm() {
 						onChange={(e) => (password.current = e.target.value)}
 					/>
 				</div>
+
+				{error && <p className={styles.error}>Authentication failed!</p>}
 
 				<button type="submit">Login</button>
 			</form>

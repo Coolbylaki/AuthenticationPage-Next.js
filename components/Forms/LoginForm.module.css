@@ -44,3 +44,13 @@
 	left: 1rem;
 	top: 1rem;
 }
+
+.error {
+	margin-bottom: 1rem;
+	text-align: center;
+	background-color: rgb(199, 36, 36);
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	color: var(--text-primary);
+	font-weight: bold;
+}

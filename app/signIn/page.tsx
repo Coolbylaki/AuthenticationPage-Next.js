@@ -7,10 +7,12 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Home() {
 	const [logoSrc, setLogoSrc] = useState("/devchallenges.svg");
+	const searchParams = useSearchParams();
+	const isNotValid = !!searchParams.get("error");
 
 	const router = useRouter();
 
@@ -32,7 +34,7 @@ export default function Home() {
 				className={styles.logo}
 			/>
 
-			<LoginForm />
+			<LoginForm error={isNotValid} />
 
 			<p className={styles.sub__desc}>or continue with these social profile</p>
 
