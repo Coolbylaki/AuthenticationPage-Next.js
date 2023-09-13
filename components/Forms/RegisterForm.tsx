@@ -1,20 +1,30 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
-import { FormEvent, use, useRef } from "react";
+import { FormEvent, useState, useRef } from "react";
 import styles from "./RegisterForm.module.css";
 
 export default function RegisterForm() {
+	const [isPasswordValid, setIsPasswordValid] = useState(false);
+
 	const emailRef = useRef<HTMLInputElement | null>(null);
 	const passwordRef = useRef<HTMLInputElement | null>(null);
 
 	const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
+		const passwordRegex = /^(?=.*\d).{8,}$/;
 		event.preventDefault();
 
 		const user = {
 			email: emailRef.current?.value,
 			password: passwordRef.current?.value,
 		};
+
+		if (!user.password?.match(passwordRegex)) {
+			setIsPasswordValid(true);
+			return;
+		}
+
+		setIsPasswordValid(false);
 
 		try {
 			const response = await fetch("/api/user", {
@@ -50,7 +60,7 @@ export default function RegisterForm() {
 						icon={faEnvelope}
 						style={{ color: "#828282" }}
 					/>
-					<input type="text" placeholder="Email" ref={emailRef} />
+					<input type="email" placeholder="Email" ref={emailRef} />
 				</div>
 				<div className={styles.inputContainer}>
 					<FontAwesomeIcon
@@ -58,8 +68,14 @@ export default function RegisterForm() {
 						icon={faLock}
 						style={{ color: "#828282" }}
 					/>
-					<input type="text" placeholder="Password" ref={passwordRef} />
+					<input type="password" placeholder="Password" ref={passwordRef} />
 				</div>
+
+				{isPasswordValid && (
+					<p className={styles.error}>
+						Password must contain a number and at least 8 char long
+					</p>
+				)}
 
 				<button type="submit">Start coding now</button>
 			</form>
