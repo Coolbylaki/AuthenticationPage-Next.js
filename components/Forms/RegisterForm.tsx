@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 
-import { FormEvent, useState, ChangeEvent, useEffect } from "react";
+import { FormEvent, useState, ChangeEvent } from "react";
 import styles from "./RegisterForm.module.css";
 
 export default function RegisterForm() {
@@ -10,36 +10,28 @@ export default function RegisterForm() {
 	const [formErrors, setFormErrors] = useState<{ email?: string; password?: string }>(
 		{}
 	);
-	const [isSubmit, setIsSubmit] = useState(false);
-	const [isValidated, setIsValidated] = useState(false);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setFormValues({ ...formValues, [name]: value });
 	};
 
-	useEffect(() => {
-		if (Object.keys(formErrors).length === 0 && isSubmit) {
-			// When both are true we get this
-			setIsValidated(true);
-		} else {
-			setIsValidated(false);
-		}
-	}, [formErrors, formValues, isSubmit]);
-
 	const onSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		setFormErrors(validate(formValues));
+		// Validate the form
+		const errors = validate(formValues);
 
-		setIsSubmit(true);
+		// Set the form errors
+		setFormErrors(errors);
 
-		const user = {
-			email: formValues.email,
-			password: formValues.password,
-		};
+		// Check if there are no errors
+		if (Object.keys(errors).length === 0) {
+			const user = {
+				email: formValues.email,
+				password: formValues.password,
+			};
 
-		if (isValidated) {
 			try {
 				const response = await fetch("/api/user", {
 					method: "POST",
